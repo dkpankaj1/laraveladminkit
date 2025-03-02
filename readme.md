@@ -1,4 +1,4 @@
-# AdminKit Installation Command
+# AdminKit For Laravel
 
 ## Overview
 The `install:adminkit` Artisan command simplifies the installation of AdminKit by copying necessary controllers, requests, views, components, and assets into your Laravel application.
