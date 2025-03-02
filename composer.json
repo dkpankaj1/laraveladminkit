@@ -1,0 +1,35 @@
+{
+    "name": "dkpankaj1/adminkit",
+    "description": "A Laravel package for an admin dashboard kit with authentication, datatables, and UI components.",
+    "type": "library",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "Dkpankaj1\\Adminkit\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Dipankar kumar pankaj",
+            "email": "dipankarpankaj38@gmail.com"
+        }
+    ],
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Dkpankaj1\\AdminKit\\AdminKitServiceProvider"
+            ],
+            "aliases": {}
+        }
+    },
+    "require": {
+        "php": "^8.2",
+        "laravel/framework": "^11.31"
+    },
+    "config": {
+        "sort-packages": true,
+        "optimize-autoloader": true
+    },
+    "prefer-stable": true,
+    "minimum-stability": "stable"
+}
