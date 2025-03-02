@@ -17,9 +17,8 @@
     "extra": {
         "laravel": {
             "providers": [
-                "Dkpankaj1\\AdminKit\\AdminKitServiceProvider"
-            ],
-            "aliases": {}
+                "\\Dkpankaj1\\AdminKit\\AdminKitServiceProvider"
+            ]
         }
     },
     "require": {
