@@ -33,7 +33,7 @@ class InstallAdminKit extends Command
             ['source' => __DIR__ . '/../../stubs/app/Http/Requests', 'destination' => app_path('Http/Requests')],
             ['source' => __DIR__ . '/../../stubs/kadso/resource/views', 'destination' => resource_path('views')],
             ['source' => __DIR__ . '/../../stubs/app/View/Components', 'destination' => app_path('View/Components')],
-            ['source' => __DIR__ . '/../../stubs/kadso/assets', 'destination' => public_path('assets/kadso')],
+            ['source' => __DIR__ . '/../../stubs/kadso/assets', 'destination' => public_path('assets')],
         ];
 
         foreach ($paths as $path) {
