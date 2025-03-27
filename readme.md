@@ -17,7 +17,7 @@ Follow these steps to install AdminKit:
 ### Step 1: Install via Composer
 
 ```sh
-composer require dkpankaj1/adminkit
+composer require dkpankaj1/adminkit --dev
 ```
 
 ### Step 2: Add Service Provider
