@@ -22,10 +22,6 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
 
         Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
-        Route::group(['prefix' => "account", 'as' => 'account.'], function () {
-
-        });
-
         Route::group(['prefix' => 'account', 'as' => 'account.'], function () {
             Route::get('/', [AccountController::class, 'index'])->name('index');
             Route::get('update', [AccountController::class, 'profile'])->name('update');
