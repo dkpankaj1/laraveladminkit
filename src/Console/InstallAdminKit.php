@@ -43,6 +43,7 @@ class InstallAdminKit extends Command
             ['source' => __DIR__ . '/../../stubs/approx/app/Http/Requests', 'destination' => app_path('Http/Requests')],
             ['source' => __DIR__ . '/../../stubs/approx/app/View/Components', 'destination' => app_path('View/Components')],
             ['source' => __DIR__ . '/../../stubs/approx/app/Support', 'destination' => app_path('Support')],
+            ['source' => __DIR__ . '/../../stubs/approx/database/migrations', 'destination' => database_path('migrations')],
             ['source' => __DIR__ . '/../../stubs/approx/resource/views', 'destination' => resource_path('views')],
             ['source' => __DIR__ . '/../../stubs/approx/resource/assets', 'destination' => public_path('assets')],
         ];
