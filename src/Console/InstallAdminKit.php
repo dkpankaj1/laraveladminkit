@@ -46,6 +46,7 @@ class InstallAdminKit extends Command
             ['source' => __DIR__ . '/../../stubs/approx/database/migrations', 'destination' => database_path('migrations')],
             ['source' => __DIR__ . '/../../stubs/approx/resource/views', 'destination' => resource_path('views')],
             ['source' => __DIR__ . '/../../stubs/approx/resource/assets', 'destination' => public_path('assets')],
+            ['source' => __DIR__ . '/../../stubs/approx/lang', 'destination' => lang_path()],
         ];
 
         // Prompt user to select a theme
