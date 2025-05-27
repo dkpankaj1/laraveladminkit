@@ -42,7 +42,7 @@ This command will:
 2. Copy **Requests** to `app/Http/Requests`
 3. Copy **Views** to `resources/views`
 4. Copy **Components** to `app/View/Components`
-5. Copy **Assets** to `public/assets/kadso`
+5. Copy **Assets** to `public/assets/backend`
 6. Copy **Routes** to `routes/admin.php`
 
 After running the command, you should have all the necessary files in your Laravel project.
@@ -61,7 +61,7 @@ LaravelProject/
 │   ├── views/
 ├── public/
 │   ├── assets/
-│   │   ├── kadso/
+│   │   ├── backend/
 ├── routes/
 │   ├── admin.php
 ```
