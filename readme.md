@@ -89,6 +89,7 @@ web: ['other route...', __DIR__ . '/../routes/admin.php'],
 - Ensure you have proper **write permissions** on your Laravel project directories.
 - If files already exist, they **will not be overwritten**.
 - You can customize this command to fit your project’s structure by modifying `InstallAdminKit.php`.
+- If you install Theme ***[ Approx ]*** then make sure to add ***[ startbar,theme,avatar ]*** in fillable on User Model
 
 ## Troubleshooting
 
