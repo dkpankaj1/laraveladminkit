@@ -13,7 +13,7 @@
                 <li class="dropdown notification-list topbar-dropdown">
                     <a class="nav-link dropdown-toggle nav-user me-0" data-bs-toggle="dropdown" href="#" role="button"
                         aria-haspopup="false" aria-expanded="false">
-                        <img src="{{asset('assets/kadso/images/users/user-11.jpg')}}" alt="user-image"
+                        <img src="{{asset('assets/backend/images/users/user-11.jpg')}}" alt="user-image"
                             class="rounded-circle">
                         <span class="pro-user-name ms-1">
                             {{auth()->user()->name}} <i class="mdi mdi-chevron-down"></i>

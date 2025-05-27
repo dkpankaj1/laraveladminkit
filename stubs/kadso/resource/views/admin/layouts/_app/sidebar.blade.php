@@ -7,18 +7,18 @@
             <div class="logo-box">
                 <a href="index.html" class="logo logo-light">
                     <span class="logo-sm">
-                        <img src="{{asset('assets/kadso/images/logo-sm.png')}}" alt="" height="22">
+                        <img src="{{asset('assets/backend/images/logo-sm.png')}}" alt="" height="22">
                     </span>
                     <span class="logo-lg">
-                        <img src="{{asset('assets/kadso/images/logo-light.png')}}" alt="" height="24">
+                        <img src="{{asset('assets/backend/images/logo-light.png')}}" alt="" height="24">
                     </span>
                 </a>
                 <a href="index.html" class="logo logo-dark">
                     <span class="logo-sm">
-                        <img src="{{asset('assets/kadso/images/logo-sm.png')}}" alt="" height="22">
+                        <img src="{{asset('assets/backend/images/logo-sm.png')}}" alt="" height="22">
                     </span>
                     <span class="logo-lg">
-                        <img src="{{asset('assets/kadso/images/logo-dark.png')}}" alt="" height="24">
+                        <img src="{{asset('assets/backend/images/logo-dark.png')}}" alt="" height="24">
                     </span>
                 </a>
             </div>
