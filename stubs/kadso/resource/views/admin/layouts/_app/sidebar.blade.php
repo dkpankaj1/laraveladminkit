@@ -5,20 +5,20 @@
         <div id="sidebar-menu">
 
             <div class="logo-box">
-                <a href="index.html" class="logo logo-light">
+                <a href="{{ route('admin.dashboard') }}" class="logo logo-light">
                     <span class="logo-sm">
-                        <img src="{{asset('assets/backend/images/logo-sm.png')}}" alt="" height="22">
+                        <img src="{{ asset('assets/backend/images/logo-sm.png') }}" alt="" height="22">
                     </span>
                     <span class="logo-lg">
-                        <img src="{{asset('assets/backend/images/logo-light.png')}}" alt="" height="24">
+                        <img src="{{ asset('assets/backend/images/logo-light.png') }}" alt="" height="24">
                     </span>
                 </a>
-                <a href="index.html" class="logo logo-dark">
+                <a href="{{ route('admin.dashboard') }}" class="logo logo-dark">
                     <span class="logo-sm">
-                        <img src="{{asset('assets/backend/images/logo-sm.png')}}" alt="" height="22">
+                        <img src="{{ asset('assets/backend/images/logo-sm.png') }}" alt="" height="22">
                     </span>
                     <span class="logo-lg">
-                        <img src="{{asset('assets/backend/images/logo-dark.png')}}" alt="" height="24">
+                        <img src="{{ asset('assets/backend/images/logo-dark.png') }}" alt="" height="24">
                     </span>
                 </a>
             </div>
@@ -28,7 +28,7 @@
                 <li class="menu-title">Menu</li>
 
                 <li>
-                    <a href="{{route('admin.dashboard')}}">
+                    <a href="{{ route('admin.dashboard') }}">
                         <i data-feather="home"></i>
                         <span> Dashboard </span>
                     </a>
@@ -57,6 +57,13 @@
                     </div>
                 </li>
 
+                <li>
+                    <a href="{{ route('admin.settings.edit') }}">
+                        <i data-feather="settings"></i>
+                        <span> setting </span>
+                    </a>
+                </li>
+
                 <li class="menu-title">Accounts</li>
 
                 <li>
@@ -68,13 +75,13 @@
                     <div class="collapse" id="sidebarMyAccount">
                         <ul class="nav-second-level">
                             <li>
-                                <a href="{{route('admin.account.index')}}">My Account</a>
+                                <a href="{{ route('admin.account.index') }}">My Account</a>
                             </li>
                             <li>
-                                <a href="{{route('admin.account.update')}}">Update Profile</a>
+                                <a href="{{ route('admin.account.update') }}">Update Profile</a>
                             </li>
                             <li>
-                                <a href="{{route('admin.account.password')}}">Change Password</a>
+                                <a href="{{ route('admin.account.password') }}">Change Password</a>
                             </li>
                         </ul>
                     </div>

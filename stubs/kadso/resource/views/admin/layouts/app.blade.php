@@ -18,12 +18,13 @@
 
     <!-- Icons -->
     <link href="{{asset('assets/backend/css/icons.min.css')}}" rel="stylesheet" type="text/css" />
+    <link href="{{ asset('assets/backend/libs/toastr/toastr.min.css') }}" rel="stylesheet" type="text/css" />
 
 </head>
 
 <!-- body start -->
 
-<body data-menu-color="dark" data-sidebar="default">
+<body data-menu-color="{{ Session::get('theme','dark') }}" data-sidebar="default">
 
     <!-- Begin page -->
     <div id="app-layout">
@@ -81,6 +82,10 @@
     </div>
     <!-- end page -->
 
+    {{-- action::Begin --}}
+    @include('admin.layouts._app.actions')
+    {{-- action::End --}}
+
     <!-- Vendor -->
     <script src="{{asset('assets/backend/libs/jquery/jquery.min.js')}}"></script>
     <script src="{{asset('assets/backend/libs/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
@@ -89,6 +94,8 @@
     <script src="{{asset('assets/backend/libs/waypoints/lib/jquery.waypoints.min.js')}}"></script>
     <script src="{{asset('assets/backend/libs/jquery.counterup/jquery.counterup.min.js')}}"></script>
     <script src="{{asset('assets/backend/libs/feather-icons/feather.min.js')}}"></script>
+    <script src="{{ asset('assets/backend/libs/toastr/toastr.min.js') }}"></script>
+    <x-toastr />
 
     <!-- App js-->
     <script src="{{asset('assets/backend/js/app.js')}}"></script>

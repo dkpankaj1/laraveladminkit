@@ -26,40 +26,64 @@ class InstallAdminKit extends Command
      */
     public function handle()
     {
+
         $filesystem = new Filesystem();
 
-        $kadsoThemePaths = [
-            ['source' => __DIR__ . '/../../stubs/kadso/app/Http/Controllers', 'destination' => app_path('Http/Controllers')],
-            ['source' => __DIR__ . '/../../stubs/kadso/app/Http/Middleware', 'destination' => app_path('Http/Middleware')],
-            ['source' => __DIR__ . '/../../stubs/kadso/app/Http/Requests', 'destination' => app_path('Http/Requests')],
-            ['source' => __DIR__ . '/../../stubs/kadso/app/View/Components', 'destination' => app_path('View/Components')],
-            ['source' => __DIR__ . '/../../stubs/kadso/resource/views', 'destination' => resource_path('views')],
-            ['source' => __DIR__ . '/../../stubs/kadso/resource/assets', 'destination' => public_path('assets')],
+        $corePath = [
+            ['source' => __DIR__ . '/../../stubs/core/app/Http/Controllers', 'destination' => app_path('Http/Controllers')],
+            ['source' => __DIR__ . '/../../stubs/core/app/Http/Middleware', 'destination' => app_path('Http/Middleware')],
+            ['source' => __DIR__ . '/../../stubs/core/app/Http/Requests', 'destination' => app_path('Http/Requests')],
+            ['source' => __DIR__ . '/../../stubs/core/app/View/Components', 'destination' => app_path('View/Components')],
+            ['source' => __DIR__ . '/../../stubs/core/app/Models', 'destination' => app_path('Models')],
+            ['source' => __DIR__ . '/../../stubs/core/app/Support', 'destination' => app_path('Support')],
+            ['source' => __DIR__ . '/../../stubs/core/database/migrations', 'destination' => database_path('migrations')],
+            ['source' => __DIR__ . '/../../stubs/core/resource/views', 'destination' => resource_path('views')],
+            ['source' => __DIR__ . '/../../stubs/core/lang', 'destination' => lang_path()],
         ];
 
-        $aproxThemePaths = [
-            ['source' => __DIR__ . '/../../stubs/approx/app/Http/Controllers', 'destination' => app_path('Http/Controllers')],
-            ['source' => __DIR__ . '/../../stubs/approx/app/Http/Middleware', 'destination' => app_path('Http/Middleware')],
-            ['source' => __DIR__ . '/../../stubs/approx/app/Http/Requests', 'destination' => app_path('Http/Requests')],
-            ['source' => __DIR__ . '/../../stubs/approx/app/View/Components', 'destination' => app_path('View/Components')],
-            ['source' => __DIR__ . '/../../stubs/approx/app/Support', 'destination' => app_path('Support')],
-            ['source' => __DIR__ . '/../../stubs/approx/database/migrations', 'destination' => database_path('migrations')],
-            ['source' => __DIR__ . '/../../stubs/approx/resource/views', 'destination' => resource_path('views')],
-            ['source' => __DIR__ . '/../../stubs/approx/resource/assets', 'destination' => public_path('assets')],
-            ['source' => __DIR__ . '/../../stubs/approx/lang', 'destination' => lang_path()],
+        $routePath = ['source' => __DIR__ . '/../../stubs/core/routes/admin.php', 'destination' => base_path('routes/admin.php')];
+
+        $kadsoThemePaths = [
+            ['source' => __DIR__ . '/../../stubs/kadso/resource/views', 'destination' => resource_path('views')],
+            ['source' => __DIR__ . '/../../stubs/kadso/assets', 'destination' => public_path('assets')]
         ];
+
+        $drezocThemePaths = [
+            ['source' => __DIR__ . '/../../stubs/drezoc/resource/views', 'destination' => resource_path('views')],
+            ['source' => __DIR__ . '/../../stubs/drezoc/assets', 'destination' => public_path('assets')]
+        ];
+
+
 
         // Prompt user to select a theme
-        $theme = $this->choice('Which theme would you like to install?', ['Kadso', 'Aprox'], 0);
+        $theme = $this->choice('Which theme would you like to install?', ['Kadso', 'Drezoc'], 0);
 
         // Set theme paths and stub route based on user selection
-        $themePaths = ($theme === 'Kadso') ? $kadsoThemePaths : $aproxThemePaths;
-        $routeSource = __DIR__ . '/../../stubs/' . ($theme === 'Kadso' ? 'kadso' : 'approx') . '/routes/admin.php';
-        $routeDestination = base_path('routes/admin.php');
+        $themePaths = ($theme === 'Kadso') ? $kadsoThemePaths : $drezocThemePaths;
+
 
         $this->info("💽 Installing AdminKit ($theme theme)...");
-        $progressBar = $this->output->createProgressBar(count($themePaths) + 1);
+
+        $totalSteps = count($corePath) + count($themePaths) + 1; // +1 for route copy
+        $progressBar = $this->output->createProgressBar($totalSteps);
         $progressBar->start();
+
+
+        // copy core Files
+        foreach ($corePath as $path) {
+            if ($filesystem->exists($path['source'])) {
+                $filesystem->ensureDirectoryExists($path['destination']);
+                $filesystem->copyDirectory($path['source'], $path['destination']);
+            }
+            $progressBar->advance();
+        }
+
+        // copy route file
+        if ($filesystem->exists($routePath['source']) && !$filesystem->exists($routePath['destination'])) {
+            $filesystem->copy($routePath['source'], $routePath['destination']);
+            $progressBar->advance();
+        }
+
 
         foreach ($themePaths as $path) {
             if ($filesystem->exists($path['source'])) {
@@ -69,15 +93,10 @@ class InstallAdminKit extends Command
             $progressBar->advance();
         }
 
-        // Copy Routes
-        if ($filesystem->exists($routeSource) && !$filesystem->exists($routeDestination)) {
-            $filesystem->copy($routeSource, $routeDestination);
-        }
 
-        $progressBar->advance();
         $progressBar->finish();
-
         $this->newLine();
         $this->info("✅ AdminKit ($theme theme) installed successfully!");
+
     }
 }

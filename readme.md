@@ -2,7 +2,7 @@
 
 ## Overview
 
-AdminKit for Laravel provides a seamless way to integrate a customizable admin interface into your Laravel application. The `install:adminkit` Artisan command allows you to choose between two themes (**Kadso** or **Aprox**) and automatically copies controllers, middleware, requests, view components, views, assets, migrations, language files, and routes to your project.
+AdminKit for Laravel provides a seamless way to integrate a customizable admin interface into your Laravel application. The `install:adminkit` Artisan command allows you to choose between two themes (**Kadso** or **Drezoc**) and automatically copies controllers, middleware, requests, view components, models, support files, views, assets, migrations, language files, and routes to your project.
 
 ## Requirements
 
@@ -40,17 +40,26 @@ php artisan install:adminkit
 ```
 
 This command will:
-1. Prompt you to select a theme (**Kadso** or **Aprox**).
-2. Copy the following files based on the selected theme:
+1. Prompt you to select a theme (**Kadso** or **Drezoc**).
+2. Copy the following core files to your project:
    - **Controllers** to `app/Http/Controllers`
    - **Middleware** to `app/Http/Middleware`
    - **Requests** to `app/Http/Requests`
    - **View Components** to `app/View/Components`
+   - **Models** to `app/Models`
+   - **Support Files** to `app/Support`
    - **Views** to `resources/views`
-   - **Assets** to `public/assets`
    - **Migrations** to `database/migrations`
    - **Language Files** to `lang`
    - **Routes** to `routes/admin.php`
+3. Copy theme-specific views and assets to `resources/views` and `public/assets`, respectively.
+4. Prompt for confirmation before overwriting existing files or directories.
+
+Run the command with verbose output to debug issues:
+
+```bash
+php artisan install:adminkit -v
+```
 
 ### Step 4: Run Migrations (Optional)
 
@@ -94,8 +103,10 @@ LaravelProject/
 │   │   ├── Requests/            # Form request classes
 │   ├── View/
 │   │   ├── Components/          # Blade view components
+│   ├── Models/                  # Admin-related models
+│   ├── Support/                 # Support classes
 ├── resources/
-│   ├── views/                   # Blade templates
+│   ├── views/                   # Blade templates for the selected theme
 ├── public/
 │   ├── assets/                  # Theme assets (CSS, JS, images)
 ├── database/
@@ -109,38 +120,60 @@ LaravelProject/
 
 ## Configuration
 
-### Theme-Specific Notes
-- **Aprox Theme**: If you select the **Aprox** theme, ensure the `User` model includes the following fields in the `$fillable` array:
-  ```php
-  protected $fillable = ['startbar', 'theme', 'avatar', ...];
-  ```
-- **Kadso Theme**: No additional model configuration is required.
+### Theme Selection
+The `install:adminkit` command prompts you to choose between the **Kadso** or **Drezoc** theme. Each theme includes specific views and assets tailored to its design.
+
+### Overwrite Protection
+If destination files or directories already exist, the command will prompt for confirmation before overwriting. To skip overwriting, answer "no" to the prompt, and the command will continue with the remaining files.
 
 ### Language Files
 Language files are copied to the `lang` directory (e.g., `lang/en/messages.php`). Ensure your application’s locale is set in `config/app.php` (e.g., `'locale' => 'en'`) to use the appropriate language.
 
 ### Migrations
-Migration files are copied to `database/migrations`. Ensure that migration files have unique timestamps or filenames to avoid conflicts. You can verify this by checking the `database/migrations` directory after installation.
+Migration files are copied to `database/migrations`. Ensure that migration files have unique timestamps or filenames to avoid conflicts. Verify this by checking the `database/migrations` directory after installation.
 
 ## Notes
-- **Theme Selection**: The `install:adminkit` command prompts you to choose between the **Kadso** or **Aprox** theme.
-- **File Overwriting**: Existing files in the destination directories will not be overwritten by default. If you need to overwrite files, modify the `InstallAdminKit.php` command to include a confirmation prompt.
-- **Permissions**: Ensure write permissions for the `app`, `resources`, `public`, `database`, and `lang` directories. Use `chmod -R 775 storage/ bootstrap/ public/ database/ lang/` if needed.
+- **Permissions**: Ensure write permissions for the `app`, `resources`, `public`, `database`, and `lang` directories. Use the following command if needed:
+  ```bash
+  chmod -R 775 storage/ bootstrap/ public/ database/ lang/
+  ```
+  On Linux/Mac, you may also need to set the correct owner:
+  ```bash
+  chown -R www-data:www-data .
+  ```
+  (Replace `www-data` with your web server user.)
+
 - **Customization**: You can extend or modify the `InstallAdminKit.php` command to customize the installation process for your project.
 - **Locale Configuration**: Verify that your application’s locale matches the language files provided by the theme.
+- **Verbose Output**: Use the `-v` flag with the `install:adminkit` command to see detailed progress and identify potential issues.
 
 ## Troubleshooting
 
 If you encounter issues during installation, try the following:
-- **Command Fails**: Ensure you are running the command in a Laravel project root directory.
-- **File Conflicts**: Check for existing files in the destination directories. Rename or back up conflicting files before running the command.
-- **Migration Issues**: Verify that migration files have unique timestamps to prevent conflicts. Run `php artisan migrate:status` to check.
-- **Permissions**: Ensure directories are writable. Use `chmod -R 775 storage/ bootstrap/ public/ database/ lang/`.
-- **Cache Issues**: Clear configuration and cache with:
-  ```bash
-  php artisan config:clear
-  php artisan cache:clear
-  ```
+
+- **Command Hangs or Fails**:
+  - Run with verbose output: `php artisan install:adminkit -v`.
+  - Check if source stub directories exist in the package (`vendor/dkpankaj1/adminkit/stubs`).
+  - Ensure sufficient disk space on the server.
+
+- **File Conflicts**:
+  - The command prompts before overwriting existing files. Back up conflicting files before proceeding.
+  - Check for existing files in `app`, `resources`, `public`, `database`, and `lang` directories.
+
+- **Permission Issues**:
+  - Ensure directories are writable: `chmod -R 775 storage/ bootstrap/ public/ database/ lang/`.
+  - Verify the correct ownership for your web server user.
+
+- **Migration Issues**:
+  - Verify that migration files have unique timestamps: `ls database/migrations`.
+  - Run `php artisan migrate:status` to check for conflicts.
+
+- **Cache Issues**:
+  - Clear configuration and cache:
+    ```bash
+    php artisan config:clear
+    php artisan cache:clear
+    ```
 
 ## License
 
